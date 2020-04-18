@@ -11,4 +11,5 @@ while IFS='=' read -r name value ; do
 done < <(env)
 
 nmbd -D
+avahi-daemon
 smbd -FS --no-process-group
