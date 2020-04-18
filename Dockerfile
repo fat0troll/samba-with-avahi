@@ -1,7 +1,11 @@
 FROM alpine
 MAINTAINER Vladimir Hodakov <vladimir@hodakov.me>
 
-RUN apk add --no-cache samba-common-tools samba-server
+RUN apk add --no-cache tini bash samba-common-tools samba-server
+
+COPY entrypoint.sh /usr/local/bin/entrypoint
+
+RUN ["chmod", "+x", "/usr/local/bin/entrypoint"]
 
 VOLUME /etc/samba \
        /var/lib/samba \
@@ -12,4 +16,4 @@ EXPOSE 137/udp \
        139/tcp \
        445/tcp
 
-CMD nmbd -D && smbd -FS --no-process-group
+CMD ["/sbin/tini", "--", "/usr/local/bin/entrypoint"]
