@@ -7,7 +7,7 @@ COPY entrypoint.sh /usr/local/bin/entrypoint
 
 RUN ["chmod", "+x", "/usr/local/bin/entrypoint"]
 
-VOLUME /etc/avahi/services/ \
+VOLUME /etc/avahi \
        /etc/samba \
        /var/lib/samba \
        /data
